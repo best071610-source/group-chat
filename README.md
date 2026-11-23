@@ -15,4 +15,4 @@
 
 ## GitHub Pages
 
-GitHub Pages публикует корень ветки `main` по адресу `https://best071610-source.github.io/laba-9/`. Приложение использует относительные пути к CSS и JavaScript и не требует сборки.
+GitHub Pages публикует корень ветки `main` по адресу `https://best071610-source.github.io/group-chat/`. Приложение использует относительные пути к CSS и JavaScript и не требует сборки.
