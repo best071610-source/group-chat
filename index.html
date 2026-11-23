@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101313" />
+    <meta name="description" content="Групповой чат для авторизованных участников." />
+    <title>Комната — групповой чат</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Комната — главная">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>комната<span class="brand-period">.</span></span>
+        </a>
+        <div class="topbar-note"><span class="topbar-dot"></span> место для разговора</div>
+      </header>
+
+      <main>
+        <section class="auth-layout" id="auth-screen" aria-labelledby="auth-title">
+          <div class="intro-panel">
+            <div class="eyebrow"><span class="eyebrow-line"></span> ОБЩИЙ ЧАТ</div>
+            <h1>Собрались?<br /><span>Пишите.</span></h1>
+            <p class="intro-copy">Одна комната для всех. Войдите или создайте аккаунт, чтобы быть на связи.</p>
+            <div class="chat-preview" aria-hidden="true">
+              <div class="preview-topline"><span class="preview-title">вечерний чат</span><span class="preview-online"><i></i> эфир</span></div>
+              <div class="preview-message preview-message-other"><span class="preview-avatar avatar-coral">а</span><div><b>аня</b><p>ну что, кто сегодня на связи?</p></div><time>20:41</time></div>
+              <div class="preview-message preview-message-own"><div><b>вы</b><p>я уже здесь ✨</p></div><time>20:42</time></div>
+              <div class="preview-composer"><span>Напишите что-нибудь…</span><span class="preview-send">↗</span></div>
+            </div>
+            <div class="intro-footnote"><span class="tiny-spark">✳</span> коротко, живо, по делу</div>
+          </div>
+
+          <div class="auth-card">
+            <div class="auth-heading">
+              <div class="auth-kicker" id="form-kicker">С ВОЗВРАЩЕНИЕМ</div>
+              <h2 id="auth-title">Войти в комнату</h2>
+              <p id="auth-subtitle">Рады снова вас видеть.</p>
+            </div>
+            <div class="auth-switch" role="tablist" aria-label="Способ входа">
+              <button class="switch-option is-active" id="login-tab" type="button" role="tab" aria-selected="true">Вход</button>
+              <button class="switch-option" id="register-tab" type="button" role="tab" aria-selected="false">Регистрация</button>
+            </div>
+            <form class="auth-form" id="auth-form" novalidate>
+              <label class="field-label" for="username">Имя пользователя</label>
+              <div class="input-wrap"><span class="input-prefix" aria-hidden="true">@</span><input id="username" name="username" type="text" autocomplete="username" maxlength="150" placeholder="например, alex" required /></div>
+              <div class="field-row"><label class="field-label" for="password">Пароль</label><span class="field-hint" id="password-hint">ваш пароль</span></div>
+              <div class="input-wrap"><span class="input-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><rect x="3.5" y="8" width="13" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 8V5.8a3.5 3.5 0 0 1 7 0V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><input id="password" name="password" type="password" autocomplete="current-password" minlength="6" placeholder="не короче 6 символов" required /><button class="password-toggle" type="button" aria-label="Показать пароль" title="Показать пароль"><svg viewBox="0 0 20 20" fill="none"><path d="M2.5 10s2.7-4.5 7.5-4.5 7.5 4.5 7.5 4.5-2.7 4.5-7.5 4.5S2.5 10 2.5 10Z" stroke="currentColor" stroke-width="1.4"/><circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.4"/></svg></button></div>
+              <p class="form-error" id="form-error" role="alert" aria-live="polite"></p>
+              <button class="primary-button" id="submit-auth" type="submit"><span id="submit-label">Войти</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+            </form>
+            <div class="auth-footer"><span class="lock-badge" aria-hidden="true">⌑</span><span>Доступ в чат только для участников</span></div>
+          </div>
+        </section>
+
+        <section class="chat-layout is-hidden" id="chat-screen" aria-label="Групповой чат">
+          <aside class="room-panel">
+            <div class="room-overline">ВАША КОМНАТА</div>
+            <div class="room-identity"><div class="room-icon" aria-hidden="true"><span>✳</span></div><div><h1>Общий чат</h1><p>все участники здесь</p></div></div>
+            <div class="room-separator"></div>
+            <div class="room-caption">СЕЙЧАС</div>
+            <div class="room-status"><span class="status-light" id="room-status-light"></span><span id="room-status-text">Подключаемся…</span></div>
+            <div class="room-separator room-separator-bottom"></div>
+            <div class="room-hint"><span class="hint-icon">↳</span><p>Разговор открыт каждому, кто вошёл в аккаунт.</p></div>
+            <div class="room-profile"><div class="profile-avatar" id="profile-avatar">?</div><div class="profile-copy"><strong id="profile-name">участник</strong><span>в комнате</span></div><button class="logout-button" id="logout-button" type="button" aria-label="Выйти из аккаунта" title="Выйти"><svg viewBox="0 0 20 20" fill="none"><path d="M8 3H4.5A1.5 1.5 0 0 0 3 4.5v11A1.5 1.5 0 0 0 4.5 17H8M12.5 6 16 10l-3.5 4M16 10H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </aside>
+
+          <div class="conversation">
+            <header class="conversation-header"><div><div class="conversation-eyebrow">ОБЩЕЕ ПРОСТРАНСТВО</div><h2>Все на связи<span class="heading-period">.</span></h2></div><div class="connection-pill" id="connection-pill"><span class="status-light"></span><span id="connection-label">Подключение</span></div></header>
+            <div class="messages" id="messages" aria-live="polite" aria-relevant="additions text">
+              <div class="conversation-date"><span>начало разговора</span></div>
+              <div class="empty-state" id="empty-state"><div class="empty-illustration"><span class="empty-star star-a">✳</span><span class="empty-star star-b">✦</span><span class="empty-bubble">…</span></div><h3>Здесь пока тихо</h3><p>Начните разговор — остальные увидят ваше сообщение.</p></div>
+            </div>
+            <form class="composer" id="message-form"><label class="sr-only" for="message-input">Ваше сообщение</label><textarea id="message-input" rows="1" maxlength="1000" placeholder="Напишите сообщение…" disabled></textarea><div class="composer-bottom"><span class="composer-hint" id="composer-hint">Сообщение увидят все участники</span><button class="send-button" id="send-button" type="submit" disabled><span>Отправить</span><svg viewBox="0 0 20 20" fill="none"><path d="M17 3 9 11M17 3l-5 14-3-6-6-3 14-5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></form>
+          </div>
+        </section>
+      </main>
+      <footer class="page-footer"><span>КОМНАТА © 2026</span><span>Групповой чат · INAI</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
